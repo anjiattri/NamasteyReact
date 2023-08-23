@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import RestroCard from "./RestroCard";
 import Shimmer from "./Shimmer";
 import { RESTRAUNT_API } from "../utils/constants";
+import { Link } from "react-router-dom";
 function Body() {
   const [listOfRestraunts, setListOfRestraunts] = useState([]);
   const [filteredRestraunts, setFilteredRestraunts] = useState([]);
@@ -63,7 +64,11 @@ function Body() {
       </div>
       <div className="restro-container">
         {filteredRestraunts?.map((ele) => {
-          return <RestroCard key={ele.info.id} resData={ele} />;
+          return (
+            <Link to={`/restraunts/${ele.info.id}`} key={ele.info.id}>
+              <RestroCard resData={ele} />
+            </Link>
+          );
         })}
       </div>
     </div>
