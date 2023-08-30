@@ -1,4 +1,4 @@
 const Grocery = () => {
-  return <h1>Grocery Store</h1>;
+  return <h1>Grocery</h1>;
 };
 export default Grocery;

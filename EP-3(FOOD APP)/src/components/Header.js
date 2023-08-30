@@ -8,12 +8,16 @@ function Header() {
   const dotClass = onlineStatus ? "online-dot" : "offline-dot";
 
   return (
-    <div className="header">
+    <div className="flex justify-between">
       <div className="logo-container">
-        <img className="logo" src={logo} alt="logo" />
+        <img
+          className="w-34"
+          src={logo}
+          alt="logo"
+        />
       </div>
       <div className="nav-items">
-        <ul>
+        <ul className="flex p-4 m-4">
           <li>
             Online Status <span className={`status-dot ${dotClass}`}></span>
           </li>
