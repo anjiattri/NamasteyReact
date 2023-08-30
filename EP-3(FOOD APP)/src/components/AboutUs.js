@@ -15,19 +15,18 @@ import User from "./User";
 class AboutUs extends React.Component {
   constructor(props) {
     super(props);
-    console.log("parent constructor");
+    // console.log("parent constructor");
   }
   componentDidMount() {
-    console.log("parent componentDidMount");
+    // console.log("parent componentDidMount");
   }
   render() {
-    console.log("parent render");
+    // console.log("parent render");
 
     return (
       <div>
         <h1>About Us</h1>
-        <User name="Avi " location="bangore" />
-        <User name="Anjali " location="delhi" />
+        <User name="Anjali " username="anjiattri" location="bangore" />
       </div>
     );
   }
