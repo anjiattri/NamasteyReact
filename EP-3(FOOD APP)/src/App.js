@@ -1,14 +1,17 @@
-import React from "react";
-import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
+import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom/client";
-import Body from "./components/Body";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
+import { Outlet, RouterProvider, createBrowserRouter } from "react-router-dom";
+import "./../index.css";
 import AboutUs from "./components/AboutUs";
+import Body from "./components/Body";
 import Contact from "./components/Contact";
+import Footer from "./components/Footer";
+// import Grocery from "./components/Grocery";
+import Header from "./components/Header";
 import PageNotFound from "./components/PageNotFound";
 import RestrauntMenu from "./components/RestrauntMenu";
-import "./../index.css";
+
+const Grocery = lazy(() => import("./components/Grocery"));
 
 const AppLayout = () => {
   return (
@@ -37,6 +40,14 @@ const appRouter = createBrowserRouter([
       {
         path: "/restraunts/:resId",
         element: <RestrauntMenu />,
+      },
+      {
+        path: "/grocery",
+        element: (
+          <Suspense fallback={<h1>Loading</h1>}>
+            <Grocery />
+          </Suspense>
+        ),
       },
     ],
     errorElement: <PageNotFound />,
