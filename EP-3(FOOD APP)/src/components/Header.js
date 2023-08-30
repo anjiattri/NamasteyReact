@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 const logo = require("../../assets/images/logo.png");
 function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const onlineStatus = useOnlineStatus();
+  const dotClass = onlineStatus ? "online-dot" : "offline-dot";
+
   return (
     <div className="header">
       <div className="logo-container">
@@ -10,6 +14,9 @@ function Header() {
       </div>
       <div className="nav-items">
         <ul>
+          <li>
+            Online Status <span className={`status-dot ${dotClass}`}></span>
+          </li>
           <li>
             <Link to="/">Home</Link>
           </li>

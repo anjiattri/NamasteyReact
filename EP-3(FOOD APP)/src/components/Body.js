@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { RESTRAUNT_API } from "./../utils/constants";
+import useOnlineStatus from "./../utils/useOnlineStatus";
 import RestroCard from "./RestroCard";
 import Shimmer from "./Shimmer";
-import { RESTRAUNT_API } from "../utils/constants";
-import { Link } from "react-router-dom";
+
 function Body() {
   const [listOfRestraunts, setListOfRestraunts] = useState([]);
   const [filteredRestraunts, setFilteredRestraunts] = useState([]);
@@ -22,6 +24,13 @@ function Body() {
     setFilteredRestraunts(resList);
   };
 
+  const onlineStatus = useOnlineStatus();
+  if (onlineStatus === false) {
+    return (
+      <h1>Looks like you are offline!Please check your internet connection!</h1>
+    );
+  }
+
   return listOfRestraunts?.length === 0 ? (
     <Shimmer />
   ) : (
@@ -39,7 +48,7 @@ function Body() {
           <button
             className="search-btn"
             onClick={() => {
-              let filteredList = listOfRestraunts.filter((ele) => {
+              let filteredList = listOfRestraunts?.filter((ele) => {
                 return ele.info.name
                   .toLowerCase()
                   .includes(searchText.toLowerCase());
@@ -53,7 +62,7 @@ function Body() {
         <button
           className="filter-btn"
           onClick={() => {
-            let filteredList = listOfRestraunts.filter((ele) => {
+            let filteredList = listOfRestraunts?.filter((ele) => {
               return ele.info.avgRating > 4;
             });
             setFilteredRestraunts(filteredList);

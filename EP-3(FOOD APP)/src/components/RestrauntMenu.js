@@ -1,20 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
+import useMenuData from "./../utils/useMenuData";
 import Shimmer from "./Shimmer";
-import { MENU_API } from "../utils/constants";
 function RestrauntMenu() {
-  const [menuData, setMenuData] = useState([]);
+  // const [menuData, setMenuData] = useState([]);
   const { resId } = useParams();
 
-  useEffect(() => {
-    fetchMenu();
-  }, []);
+  //custom hook
+  const menuData = useMenuData(resId);
 
-  const fetchMenu = async () => {
-    const data = await fetch(`${MENU_API}&restaurantId=${resId}`);
-    const json = await data.json();
-    setMenuData(json);
-  };
+  // useEffect(() => {
+  //   fetchMenu();
+  // }, []);
+
+  // const fetchMenu = async () => {
+  //   const data = await fetch(`${MENU_API}&restaurantId=${resId}`);
+  //   const json = await data.json();
+  //   setMenuData(json);
+  // };
 
   if (menuData?.length === 0) {
     return <Shimmer />;
