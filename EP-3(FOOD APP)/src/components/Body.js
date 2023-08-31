@@ -35,18 +35,18 @@ function Body() {
     <Shimmer />
   ) : (
     <div className="body">
-      <div className="filter">
-        <div className="search-container">
+      <div className="filter flex">
+        <div className=" m-4 p-4">
           <input
             type="text"
-            className="search-box"
+            className="border border-solid border-black focus:ring-2 focus:ring-blue-500" 
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
             }}
           />
           <button
-            className="search-btn"
+            className=" px-4 py-2 bg-green-100 m-4 rounded-lg"
             onClick={() => {
               let filteredList = listOfRestraunts?.filter((ele) => {
                 return ele.info.name
@@ -59,19 +59,21 @@ function Body() {
             search
           </button>
         </div>
-        <button
-          className="filter-btn"
-          onClick={() => {
-            let filteredList = listOfRestraunts?.filter((ele) => {
-              return ele.info.avgRating > 4;
-            });
-            setFilteredRestraunts(filteredList);
-          }}
-        >
-          Top Rated Restraunts
-        </button>
+        <div className="m-4 p-4 flex items-center">
+          <button
+            className="flex px-4 py-2 m-4 bg-gray-100 rounded-lg"
+            onClick={() => {
+              let filteredList = listOfRestraunts?.filter((ele) => {
+                return ele.info.avgRating > 4;
+              });
+              setFilteredRestraunts(filteredList);
+            }}
+          >
+            Top Rated Restraunts
+          </button>
+        </div>
       </div>
-      <div className="restro-container">
+      <div className="flex flex-wrap">
         {filteredRestraunts?.map((ele) => {
           return (
             <Link to={`/restraunts/${ele.info.id}`} key={ele.info.id}>
