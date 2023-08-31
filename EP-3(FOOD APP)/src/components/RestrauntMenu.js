@@ -5,7 +5,7 @@ import RestroCategory from "./RestroCategory";
 import Shimmer from "./Shimmer";
 function RestrauntMenu() {
   const { resId } = useParams();
-  const [showIndex, setShowIndex] = useState(0);
+  const [showIndex, setShowIndex] = useState(null);
 
   //custom hook
   const menuData = useMenuData(resId);
