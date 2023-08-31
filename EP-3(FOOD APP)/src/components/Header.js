@@ -8,13 +8,9 @@ function Header() {
   const dotClass = onlineStatus ? "online-dot" : "offline-dot";
 
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between bg-pink-500">
       <div className="logo-container">
-        <img
-          className="w-34"
-          src={logo}
-          alt="logo"
-        />
+        <img style={{ width: "8rem" }} className="w-34" src={logo} alt="logo" />
       </div>
       <div className="nav-items">
         <ul className="flex p-4 m-4">
