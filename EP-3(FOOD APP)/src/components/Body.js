@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { RESTRAUNT_API } from "./../utils/constants";
 import useOnlineStatus from "./../utils/useOnlineStatus";
-import RestroCard from "./RestroCard";
+import RestroCard, { withNonVegLabel } from "./RestroCard";
 import Shimmer from "./Shimmer";
 
 function Body() {
@@ -14,12 +14,15 @@ function Body() {
     fetchData();
   }, []);
 
+  const RestroCardNonVeg = withNonVegLabel(RestroCard);
+
   const fetchData = async () => {
     const data = await fetch(RESTRAUNT_API);
     const json = await data.json();
     const resList =
       json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
         ?.restaurants;
+    console.log("resList", resList);
     setListOfRestraunts(resList);
     setFilteredRestraunts(resList);
   };
@@ -39,7 +42,7 @@ function Body() {
         <div className=" m-4 p-4">
           <input
             type="text"
-            className="border border-solid border-black focus:ring-2 focus:ring-blue-500" 
+            className="border border-solid border-black focus:ring-2 focus:ring-blue-500"
             value={searchText}
             onChange={(e) => {
               setSearchText(e.target.value);
@@ -77,7 +80,12 @@ function Body() {
         {filteredRestraunts?.map((ele) => {
           return (
             <Link to={`/restraunts/${ele.info.id}`} key={ele.info.id}>
-              <RestroCard resData={ele} />
+              {/* if restro is non veg add a nong veg label to it */}
+              {ele?.info?.veg ? (
+                <RestroCard resData={ele} />
+              ) : (
+                <RestroCardNonVeg resData={ele} />
+              )}
             </Link>
           );
         })}

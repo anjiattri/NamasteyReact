@@ -22,4 +22,18 @@ function RestroCard(props) {
   );
 }
 
+// higher order restro card
+// input=>restro card,    ouput->restro card non veg
+export const withNonVegLabel = (RestroCard) => {
+  return (props) => {
+    return (
+      <div>
+        <label className="absolute bg-red-600 text-white rounded-lg m-2 p-2">
+          NON VEG
+        </label>
+        <RestroCard {...props} />
+      </div>
+    );
+  };
+};
 export default RestroCard;

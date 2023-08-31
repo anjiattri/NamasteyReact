@@ -1,23 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 import useMenuData from "./../utils/useMenuData";
+import RestroCategory from "./RestroCategory";
 import Shimmer from "./Shimmer";
 function RestrauntMenu() {
-  // const [menuData, setMenuData] = useState([]);
   const { resId } = useParams();
+  const [showIndex, setShowIndex] = useState(0);
 
   //custom hook
   const menuData = useMenuData(resId);
-
-  // useEffect(() => {
-  //   fetchMenu();
-  // }, []);
-
-  // const fetchMenu = async () => {
-  //   const data = await fetch(`${MENU_API}&restaurantId=${resId}`);
-  //   const json = await data.json();
-  //   setMenuData(json);
-  // };
 
   if (menuData?.length === 0) {
     return <Shimmer />;
@@ -25,26 +16,34 @@ function RestrauntMenu() {
 
   const { name, cuisines, costForTwoMessage } =
     menuData?.data?.cards?.[0]?.card?.card?.info;
-  const { itemCards } =
-    menuData?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card
-      ?.card;
 
+  const category =
+    menuData?.data?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+      (ele) => {
+        return (
+          ele?.card?.card["@type"] ==
+          "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+        );
+      }
+    );
+
+  console.log("category", category);
   return (
-    <div className="menu">
-      <h1>{name}</h1>
-      <p>
+    <div className="text-center">
+      <h1 className="font-bold my-6 text-2xl">{name}</h1>
+      <p className="font-bold text-lg">
         {cuisines.join(",")}- {costForTwoMessage}
       </p>
-      <h2>Menu</h2>
-      <ul>
-        {itemCards?.map((ele) => {
-          return (
-            <li key={ele.card.info.id}>
-              {ele?.card?.info?.name}- Rs {ele.card.info.price / 100}
-            </li>
-          );
-        })}
-      </ul>
+      {category?.map((ele, index) => {
+        //controlled component
+        return (
+          <RestroCategory
+            data={ele.card.card}
+            showItems={index == showIndex}
+            setShowIndex={() => setShowIndex(index)}
+          />
+        );
+      })}
     </div>
   );
 }
