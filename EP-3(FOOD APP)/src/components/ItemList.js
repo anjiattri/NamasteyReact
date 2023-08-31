@@ -11,7 +11,7 @@ function ItemList({ data }) {
               key={item.card.info.id}
               className="p-2 m-2  border-black border-b-4 text-left flex justify-between"
             >
-              <div>
+              <div className="w-6/12">
                 <div className="py-2">
                   <span>{item.card.info.name}</span>
                   <span> - ₹{item.card.info.price / 100}</span>
@@ -20,7 +20,7 @@ function ItemList({ data }) {
                   <p className="text-xs">{item.card.info.description}</p>
                 </div>
               </div>
-              <div>
+              <div className="w-3/12">
                 <div className="absolute">
                   <button className="p-2 bg-black text-white shadow-lg rounded-lg mx-20">
                     Add +

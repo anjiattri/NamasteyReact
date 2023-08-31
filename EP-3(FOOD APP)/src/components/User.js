@@ -14,14 +14,18 @@ class User extends React.Component {
   }
 
   async componentDidMount() {
-    console.log(this.props.name, "child componentDidMount");
-    const data = await fetch(
-      `https://api.github.com/users/${this.props.username}`
-    );
-    const json = await data.json();
-    this.setState({
-      userInfo: json,
-    });
+    try {
+      console.log(this.props.name, "child componentDidMount");
+      const data = await fetch(
+        `https://api.github.com/users/${this.props.username}`
+      );
+      const json = await data.json();
+      this.setState({
+        userInfo: json,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   componentDidUpdate() {

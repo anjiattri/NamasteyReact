@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import UserContext from "../utils/UserContext";
 import { RESTRAUNT_API } from "./../utils/constants";
 import useOnlineStatus from "./../utils/useOnlineStatus";
 import RestroCard, { withNonVegLabel } from "./RestroCard";
@@ -9,7 +10,7 @@ function Body() {
   const [listOfRestraunts, setListOfRestraunts] = useState([]);
   const [filteredRestraunts, setFilteredRestraunts] = useState([]);
   const [searchText, setSearchText] = useState("");
-
+  const { loggedInUser, setUserName } = useContext(UserContext);
   useEffect(() => {
     fetchData();
   }, []);
@@ -17,14 +18,18 @@ function Body() {
   const RestroCardNonVeg = withNonVegLabel(RestroCard);
 
   const fetchData = async () => {
-    const data = await fetch(RESTRAUNT_API);
-    const json = await data.json();
-    const resList =
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
-        ?.restaurants;
-    console.log("resList", resList);
-    setListOfRestraunts(resList);
-    setFilteredRestraunts(resList);
+    try {
+      const data = await fetch(RESTRAUNT_API);
+      const json = await data.json();
+      const resList =
+        json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle
+          ?.restaurants;
+      console.log("resList", resList);
+      setListOfRestraunts(resList);
+      setFilteredRestraunts(resList);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const onlineStatus = useOnlineStatus();
@@ -74,6 +79,18 @@ function Body() {
           >
             Top Rated Restraunts
           </button>
+        </div>
+        <div className=" m-4 p-4 flex items-center">
+          <label>UserName: </label>
+          <input
+            type="text"
+            className="border border-solid border-black focus:ring-2 focus:ring-blue-500"
+            value={loggedInUser}
+            onChange={(e) => {
+              setUserName(e.target.value);
+              // setSearchText(e.target.value);
+            }}
+          />
         </div>
       </div>
       <div className="flex flex-wrap">
