@@ -38,6 +38,7 @@ function RestrauntMenu() {
         //controlled component
         return (
           <RestroCategory
+            key={index}
             data={ele.card.card}
             showItems={index == showIndex}
             setShowIndex={() => setShowIndex(index)}
