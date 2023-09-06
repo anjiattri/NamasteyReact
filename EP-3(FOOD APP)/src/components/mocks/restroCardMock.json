@@ -1,0 +1,81 @@
+{
+    "info": {
+        "id": "62943",
+        "name": "LunchBox - Meals and Thalis",
+        "cloudinaryImageId": "ihc35snttvijjxogi5ya",
+        "locality": "Vyapar Kendra Road",
+        "areaName": "Sector 43",
+        "costForTwo": "₹200 for two",
+        "cuisines": [
+            "Biryani",
+            "North Indian",
+            "Punjabi",
+            "Healthy Food",
+            "Desserts",
+            "Beverages"
+        ],
+        "avgRating": 4.1,
+        "feeDetails": {
+            "restaurantId": "62943",
+            "fees": [
+                {
+                    "name": "BASE_DISTANCE",
+                    "fee": 4200
+                },
+                {
+                    "name": "BASE_TIME"
+                },
+                {
+                    "name": "ANCILLARY_SURGE_FEE"
+                }
+            ],
+            "totalFee": 4200
+        },
+        "parentId": "4925",
+        "avgRatingString": "4.1",
+        "totalRatingsString": "5K+",
+        "sla": {
+            "deliveryTime": 25,
+            "lastMileTravel": 3.5,
+            "serviceability": "SERVICEABLE",
+            "slaString": "25 mins",
+            "lastMileTravelString": "3.5 km",
+            "iconType": "ICON_TYPE_EMPTY"
+        },
+        "availability": {
+            "nextCloseTime": "2023-09-07 03:00:00",
+            "opened": true
+        },
+        "badges": {},
+        "isOpen": true,
+        "type": "F",
+        "badgesV2": {
+            "entityBadges": {
+                "imageBased": {},
+                "textBased": {},
+                "textExtendedBadges": {}
+            }
+        },
+        "aggregatedDiscountInfoV3": {
+            "header": "₹100 OFF",
+            "subHeader": "ABOVE ₹399",
+            "discountTag": "FLAT DEAL"
+        },
+        "differentiatedUi": {
+            "displayType": "ADS_UI_DISPLAY_TYPE_ENUM_DEFAULT",
+            "differentiatedUiMediaDetails": {
+                "mediaType": "ADS_MEDIA_ENUM_IMAGE",
+                "lottie": {},
+                "video": {}
+            }
+        },
+        "reviewsSummary": {},
+        "displayType": "RESTAURANT_DISPLAY_TYPE_DEFAULT",
+        "restaurantOfferPresentationInfo": {}
+    },
+    "analytics": {},
+    "cta": {
+        "link": "https://www.swiggy.com/restaurants/lunchbox-meals-and-thalis-vyapar-kendra-road-sector-43-gurgaon-62943",
+        "type": "WEBLINK"
+    }
+}

@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import UserContext from "../utils/UserContext";
 import useOnlineStatus from "../utils/useOnlineStatus";
-const logo = require("../../assets/images/logo.png");
+// const logo = require("../../assets/images/logo.png");
 
 function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -15,7 +15,7 @@ function Header() {
   return (
     <div className="flex justify-between bg-pink-100 shadow-lg">
       <div className="logo-container">
-        <img style={{ width: "8rem" }} src={logo} alt="logo" />
+        <img style={{ width: "8rem" }} src="../../assets/images/logo.png" alt="logo" />
       </div>
       <div className="flex items-center">
         <ul className="flex p-4 m-4">

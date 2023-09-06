@@ -6,8 +6,13 @@ function RestroCard(props) {
   const { cloudinaryImageId, name, cuisines, avgRating, sla, costForTwo } =
     resData?.info;
   const { deliveryTime } = sla;
+
+  console.log(resData);
   return (
-    <div className="m-4 p-4 w-[250px] rounded-lg bg-gray-100 hover:bg-gray-200">
+    <div
+      data-testid="resCard"
+      className="m-4 p-4 w-[250px] rounded-lg bg-gray-100 hover:bg-gray-200"
+    >
       <img
         className="rounded-lg m-2"
         alt="res-logo"

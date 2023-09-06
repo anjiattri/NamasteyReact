@@ -3,6 +3,12 @@ import { render, screen } from "@testing-library/react";
 import Contact from "../Contact";
 
 describe("test cases for contact us", () => {
+  beforeAll(() => {
+    console.log("before all test");
+  });
+  beforeEach(() => {
+    console.log("before each");
+  });
   it("should load contact us component", () => {
     // render
     render(<Contact />);
@@ -27,7 +33,7 @@ describe("test cases for contact us", () => {
   test("should load 2 input boxes in contact component", () => {
     render(<Contact />);
     const inputBoxes = screen.getAllByRole("textbox");
-    console.log(inputBoxes);
+    // console.log(inputBoxes);
     expect(inputBoxes.length).toBe(2);
   });
 });

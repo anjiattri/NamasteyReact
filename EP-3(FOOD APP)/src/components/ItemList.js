@@ -17,6 +17,7 @@ function ItemList({ data }) {
           return (
             <div
               key={item.card.info.id}
+              data-testid="foodItems"
               className="p-2 m-2  border-black border-b-4 text-left flex justify-between"
             >
               <div className="w-6/12">

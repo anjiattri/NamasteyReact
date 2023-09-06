@@ -28,7 +28,7 @@ function Body() {
       setListOfRestraunts(resList);
       setFilteredRestraunts(resList);
     } catch (error) {
-      console.error(error);
+      // console.log(error);
     }
   };
 
@@ -47,6 +47,7 @@ function Body() {
         <div className=" m-4 p-4">
           <input
             type="text"
+            data-testid="searchInput"
             className="border border-solid border-black focus:ring-2 focus:ring-blue-500"
             value={searchText}
             onChange={(e) => {
@@ -55,6 +56,7 @@ function Body() {
           />
           <button
             className=" px-4 py-2 bg-green-100 m-4 rounded-lg"
+            data-testid="searchBtn"
             onClick={() => {
               let filteredList = listOfRestraunts?.filter((ele) => {
                 return ele.info.name
