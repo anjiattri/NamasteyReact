@@ -47,7 +47,7 @@ const Login = () => {
           // Signed in
           const user = userCredential.user;
           updateProfile(user, {
-            displayName: name,
+            displayName: name.current.value,
             photoURL: "https://avatars.githubusercontent.com/u/50075812?v=4",
           })
             .then(() => {
@@ -83,7 +83,7 @@ const Login = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           updateProfile(user, {
-            displayName: name,
+            displayName: name.current.value,
             photoURL: "https://avatars.githubusercontent.com/u/50075812?v=4",
           })
             .then(() => {
