@@ -6,7 +6,7 @@ import Body from "../Body";
 import MOCK_DATA from "../mocks/bodyDataMock.json";
 
 global.fetch = jest.fn(() => {
-  return new Promise.resolve({
+  return Promise.resolve({
     json: () => Promise.resolve(MOCK_DATA),
   });
 });

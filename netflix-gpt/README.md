@@ -5,20 +5,17 @@ Configured Tailwind
 
 # Features
 
--Browse Page (after authentication)
-    -header
-    -main movie
-        -trailer in background
-        -title and description
-        -movie suggestions
-            -movie lists
--Login/Signup 
-    -sign in
-    -signup form
-    -redirect to browse page
--Netflix gpt
-    -searchbar
-    -movie suggestions
-    
-
-
+- Browse Page (after authentication)
+  - header
+  - main movie
+    - trailer in background
+    - title and description
+    - movie suggestions
+      - movie lists
+- Login/Signup
+  - sign in
+  - signup form
+  - redirect to browse page
+- Netflix gpt
+  - searchbar
+  - movie suggestions

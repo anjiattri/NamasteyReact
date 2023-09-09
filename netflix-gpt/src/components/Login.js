@@ -5,16 +5,14 @@ import {
 } from "firebase/auth";
 import React, { useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import { addUser } from "../redux/userSlice";
-import { BG_URL } from "../utils/constants";
+import { BG_URL, photoURL } from "../utils/constants";
 import { auth } from "../utils/firebase";
 import { checkValidData } from "../utils/validate";
 import Header from "./Header";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [isSignIn, SetIsSignIn] = useState(true);
   const [errorMessage, setErrorMessage] = useState(null);
   const name = useRef(null);
@@ -48,7 +46,7 @@ const Login = () => {
           const user = userCredential.user;
           updateProfile(user, {
             displayName: name.current.value,
-            photoURL: "https://avatars.githubusercontent.com/u/50075812?v=4",
+            photoURL: photoURL,
           })
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
@@ -62,8 +60,6 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-
-              navigate("/browse");
             })
             .catch((err) => {
               setErrorMessage(err.message);
@@ -72,7 +68,6 @@ const Login = () => {
         .catch((error) => {
           const errorMessage = error.message;
           setErrorMessage(errorMessage);
-          navigate("/");
         });
     } else {
       signInWithEmailAndPassword(
@@ -83,13 +78,11 @@ const Login = () => {
         .then((userCredential) => {
           const user = userCredential.user;
           updateProfile(user, {
-            displayName: name.current.value,
-            photoURL: "https://avatars.githubusercontent.com/u/50075812?v=4",
+            displayName: name?.current?.value,
+            photoURL: photoURL,
           })
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
-              console.log("succes", user);
-
               dispatch(
                 addUser({
                   uid: uid,
@@ -98,19 +91,14 @@ const Login = () => {
                   photoURL: photoURL,
                 })
               );
-
-              navigate("/browse");
             })
             .catch((err) => {
               setErrorMessage(err.message);
             });
-          console.log("succes", user);
-          navigate("/browse");
         })
         .catch((error) => {
           const errorMessage = error.message;
           setErrorMessage(errorMessage);
-          navigate("/");
         });
     }
   };

@@ -1,17 +1,49 @@
-import { signOut } from "firebase/auth";
-import React from "react";
-import { useSelector } from "react-redux";
+import { onAuthStateChanged, signOut } from "firebase/auth";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { addUser, removeUser } from "../redux/userSlice";
 import { LOGO_URL } from "../utils/constants";
 import { auth } from "../utils/firebase";
 
 const Header = () => {
   const user = useSelector((store) => store.user);
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  //put in header as it will be there always-navigate will be from here as not anywhere else
+  //onAuthStateChanged is event listener
+  useEffect(() => {
+    const unsubsribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid, email, displayName, photoURL } = user;
+        dispatch(
+          addUser({
+            uid: uid,
+            email: email,
+            displayName: displayName,
+            photoURL: photoURL,
+          })
+        );
+        navigate("/browse");
+        // ...
+      } else {
+        // User is signed out
+        dispatch(removeUser());
+        navigate("/");
+      }
+    });
+
+    //unsubsribe onAuthStateChanged when component onmounts
+    return () => {
+      unsubsribe();
+    };
+  }, []);
+
   const handleLogout = () => {
     signOut(auth)
       .then(() => {
-        navigate("/");
         //dont have to dispatch as it has been in body when state change
       })
       .catch((err) => {

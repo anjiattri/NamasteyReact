@@ -1,34 +1,9 @@
-import { onAuthStateChanged } from "firebase/auth";
-import React, { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { addUser, removeUser } from "../redux/userSlice";
-import { auth } from "../utils/firebase";
 import Browse from "./Browse";
 import Login from "./Login";
 
 const Body = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    onAuthStateChanged(auth, (user) => {
-      if (user) {
-        const { uid, email, displayName, photoURL } = user;
-        dispatch(
-          addUser({
-            uid: uid,
-            email: email,
-            displayName: displayName,
-            photoURL: photoURL,
-          })
-        );
-        // ...
-      } else {
-        // User is signed out
-        dispatch(removeUser());
-      }
-    });
-  }, []);
 
   const appRouter = createBrowserRouter([
     {
