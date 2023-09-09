@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import { MovieList } from "./MovieList";
 
 const SecondaryContainer = () => {
-  const movies = useSelector((store) => store.movie?.nowPlayingMovies);
+  const movies = useSelector((store) => store.movie);
 
   if (!movies) {
     return;
@@ -11,10 +11,13 @@ const SecondaryContainer = () => {
   return (
     <div className="bg-black">
       <div className="-mt-60 pl-12 relative z-20">
-        <MovieList title="Now Playing Movies" moviesData={movies} />
-        <MovieList title="Trending Movies" moviesData={movies} />
-        <MovieList title="Horror Movies" moviesData={movies} />
-        <MovieList title="Hindi Movies" moviesData={movies} />
+        <MovieList
+          title="Now Playing Movies"
+          moviesData={movies.nowPlayingMovies}
+        />
+        <MovieList title="Popular Movies" moviesData={movies.popularMovies} />
+        <MovieList title="Top Rated Movies" moviesData={movies.topRatedMovies} />
+        <MovieList title="Trending Movies" moviesData={movies.trendingMovies} />
       </div>
     </div>
   );
