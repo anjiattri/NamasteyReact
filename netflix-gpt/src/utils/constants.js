@@ -21,3 +21,5 @@ export const SUPPORTED_LANGUAGES = [
   { identifier: "hi", name: "Hindi" },
   { identifier: "sp", name: "Spanish" },
 ];
+
+export const GPT_APIKEY = "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";
