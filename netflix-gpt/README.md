@@ -19,3 +19,5 @@ Configured Tailwind
 - Netflix gpt
   - searchbar
   - movie suggestions
+- GPT Search feature
+
