@@ -41,8 +41,8 @@ const GPTSearchBar = () => {
   };
 
   return (
-    <div className="pt-[10%] flex justify-center">
-      <form className="bg-black w-1/2 grid grid-cols-12">
+    <div className="pt-[40%] md:pt-[10%] flex justify-center">
+      <form className="bg-black w-full md:w-1/2 grid grid-cols-12">
         <input
           type="text"
           placeholder={lang[language].gpsSearchPlaceHolder}
