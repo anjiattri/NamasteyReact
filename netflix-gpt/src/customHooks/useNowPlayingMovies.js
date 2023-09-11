@@ -1,10 +1,11 @@
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addNowPlayingMovies } from "../redux/movieSlice";
 import { API_OPTIONS } from "../utils/constants";
 
 const useNowPlayingMovies = () => {
   const dispatch = useDispatch();
+  const nowPlayingMovies = useSelector((store) => store.movie.nowPlayingMovies);
   const url =
     "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1";
 
@@ -18,7 +19,7 @@ const useNowPlayingMovies = () => {
   };
 
   useEffect(() => {
-    getNowPlayingMovies();
+    if (!nowPlayingMovies) getNowPlayingMovies();
   }, []);
 };
 export default useNowPlayingMovies;
