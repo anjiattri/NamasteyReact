@@ -50,7 +50,6 @@ const Login = () => {
           })
             .then(() => {
               const { uid, email, displayName, photoURL } = auth.currentUser;
-              console.log("succes", user);
 
               dispatch(
                 addUser({

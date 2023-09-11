@@ -13,7 +13,6 @@ const useNowPlayingMovies = () => {
       .then((res) => res.json())
       .then((json) => {
         dispatch(addNowPlayingMovies(json.results));
-        console.log(json.results);
       })
       .catch((err) => console.error("error:" + err));
   };

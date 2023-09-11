@@ -13,7 +13,6 @@ const useTopRatedMovies = () => {
       .then((res) => res.json())
       .then((json) => {
         dispatch(addTopRatedMovies(json.results));
-        console.log(json.results);
       })
       .catch((err) => console.error("error:" + err));
   };

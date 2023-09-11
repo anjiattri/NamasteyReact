@@ -13,7 +13,6 @@ const usePopularMovies = () => {
       .then((res) => res.json())
       .then((json) => {
         dispatch(addPopularMovies(json.results));
-        console.log(json.results);
       })
       .catch((err) => console.error("error:" + err));
   };

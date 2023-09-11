@@ -13,7 +13,6 @@ const useTrendingMovies = () => {
       .then((res) => res.json())
       .then((json) => {
         dispatch(addTrendingMovies(json.results));
-        console.log(json.results);
       })
       .catch((err) => console.error("error:" + err));
   };
