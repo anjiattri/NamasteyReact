@@ -16,8 +16,8 @@ const VideoCard = ({ videoData }) => {
 };
 export const TrendingVideoCard = ({ videoData }) => {
   return (
-    <div className="p-1 m-1 border border-red-600">
-      <h1>Trending</h1>
+    <div className="p-1 m-1">
+      <h1 className="font-bold bg-red-600 text-white w-20 rounded-lg p-2 absolute">Trending</h1>
       <VideoCard videoData={videoData} />;
     </div>
   );
