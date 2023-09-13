@@ -3,7 +3,6 @@ import React from "react";
 const VideoCard = ({ videoData }) => {
   const { snippet, statistics } = videoData;
   const { channelTitle, thumbnails, title } = snippet;
-  console.log(snippet);
   return (
     <div className="p-2 m-6 w-80 shadow">
       <img className="rounded-lg" src={thumbnails?.high?.url} alt="thumbnail" />
@@ -15,5 +14,12 @@ const VideoCard = ({ videoData }) => {
     </div>
   );
 };
-
+export const TrendingVideoCard = ({ videoData }) => {
+  return (
+    <div className="p-1 m-1 border border-red-600">
+      <h1>Trending</h1>
+      <VideoCard videoData={videoData} />;
+    </div>
+  );
+};
 export default VideoCard;

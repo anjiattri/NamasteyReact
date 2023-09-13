@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { YOUTUBEVIDEO_URL } from "../utils/constants";
-import VideoCard from "./VideoCard";
+import VideoCard, { TrendingVideoCard } from "./VideoCard";
+import VideoCardSkeleton from "./shimmer/VideoCardSkeleton";
 
 const VideoContainer = () => {
   const [videos, setVideos] = useState(null);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     getVideos();
   }, []);
@@ -13,15 +15,23 @@ const VideoContainer = () => {
     const data = await fetch(YOUTUBEVIDEO_URL);
     const json = await data.json();
     setVideos(json?.items);
+    setLoading(false);
   };
   return (
-    <div className="flex flex-wrap">
-      {videos?.map((video) => (
-        <Link to={'/watch?v='+video.id} className="cursor-pointer">
-          <VideoCard videoData={video} />
-        </Link>
-      ))}
-    </div>
+    <>
+      {loading ? (
+        <VideoCardSkeleton />
+      ) : (
+        <div className="flex flex-wrap">
+          <TrendingVideoCard videoData={videos ? videos[0] : []} />
+          {videos?.map((video) => (
+            <Link to={"/watch?v=" + video.id} className="cursor-pointer">
+              <VideoCard videoData={video} />
+            </Link>
+          ))}
+        </div>
+      )}
+    </>
   );
 };
 
