@@ -7,6 +7,7 @@ const Head = () => {
   const dispatch = useDispatch();
   const [searchText, setSearchText] = useState("");
   const [searchData, setSearchData] = useState("");
+  const [showSuggestions, setShowSuggestions] = useState(false);
 
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
@@ -19,14 +20,20 @@ const Head = () => {
   const fetchSearchText = async () => {
     const data = await fetch(YTUBE_SEARCH_API + searchText);
     const json = await data.json();
-    console.log("json", json[1]);
     setSearchData(json[1]);
   };
+  
   useEffect(() => {
-    fetchSearchText();
+    //if diff between 2 api call is <200ms delcline the api call
+    let timer = setTimeout(() => {
+      fetchSearchText();
+    }, 200);
+
+    return () => {
+      clearTimeout(timer);
+    };
   }, [searchText]);
 
-  console.log("search", searchText);
   return (
     <div className="grid grid-flow-col p-5 m-2 shadow-lg">
       <div className="flex col-span-1 ">
@@ -45,15 +52,36 @@ const Head = () => {
         </a>
       </div>
       <div className="col-span-10">
-        <input
-          type="text"
-          className="border border-gray-400 w-1/2 px-10 rounded-l-full p-2"
-          value={searchText}
-          onChange={handleSearch}
-        />
-        <button className=" border border-gray-400 p-2 rounded-r-full bg-gray-100">
-          🔍
-        </button>
+        <div>
+          <input
+            type="text"
+            className="border border-gray-400 w-1/2 px-10 rounded-l-full p-2"
+            value={searchText}
+            onChange={handleSearch}
+            onFocus={() => {
+              setShowSuggestions(true);
+            }}
+            onBlur={() => {
+              setShowSuggestions(false);
+            }}
+          />
+          <button className=" border border-gray-400 p-2 rounded-r-full bg-gray-100">
+            🔍
+          </button>
+        </div>
+        {searchData && showSuggestions && (
+          <div className="fixed bg-white py-2 px-5 w-[45rem] shadow-lg rounded-lg border border-gray-100">
+            <ul>
+              {searchData.map((ele) => {
+                return (
+                  <li ke={ele} className="shadow-sm py-2 hover:bg-gray-100">
+                    🔍 {ele}
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
       </div>
       <div className="col-span-1">
         <img
