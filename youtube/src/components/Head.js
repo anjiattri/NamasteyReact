@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toggleMenu } from "../redux/appSlice";
+import { cacheResult } from "../redux/searchSlice";
 import { YTUBE_SEARCH_API } from "../utils/constants";
 
 const Head = () => {
@@ -8,6 +9,7 @@ const Head = () => {
   const [searchText, setSearchText] = useState("");
   const [searchData, setSearchData] = useState("");
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const searchCache = useSelector((store) => store.search);
 
   const toggleMenuHandler = () => {
     dispatch(toggleMenu());
@@ -21,12 +23,22 @@ const Head = () => {
     const data = await fetch(YTUBE_SEARCH_API + searchText);
     const json = await data.json();
     setSearchData(json[1]);
+
+    dispatch(
+      cacheResult({
+        [searchText]: json[1],
+      })
+    );
   };
-  
+
   useEffect(() => {
     //if diff between 2 api call is <200ms delcline the api call
     let timer = setTimeout(() => {
-      fetchSearchText();
+      if (searchCache[searchText]) {
+        setSearchData(searchCache[searchText]);
+      } else {
+        fetchSearchText();
+      }
     }, 200);
 
     return () => {
