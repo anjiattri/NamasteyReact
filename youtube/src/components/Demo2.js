@@ -14,7 +14,7 @@ const Demo2 = () => {
     }, 1000);
 
     return () => {
-      clearInterval(i);
+      clearInterval(i.current);
     };
   });
   return (
