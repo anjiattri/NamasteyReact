@@ -2,6 +2,7 @@ import { Provider } from "react-redux";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Body from "./components/Body";
 import Demo from "./components/Demo";
+import Demo2 from "./components/Demo2";
 import Head from "./components/Head";
 import MainContainer from "./components/MainContainer";
 import VideoWatch from "./components/VideoWatch";
@@ -19,7 +20,12 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/demo",
-        element: <Demo />,
+        element: (
+          <>
+            <Demo />
+            <Demo2 />
+          </>
+        ),
       },
     ],
   },

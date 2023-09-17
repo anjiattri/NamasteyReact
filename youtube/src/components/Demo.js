@@ -4,7 +4,8 @@ import { findNthPrime } from "../utils/helpers";
 const Demo = () => {
   const [text, setText] = useState(0);
   const [isDarkTheme, setIsDarkTheme] = useState(false);
-  console.log("rendering");
+
+  //   const prime = findNthPrime(parseInt(text, 10));
   const prime = useMemo(() => findNthPrime(parseInt(text, 10)), [text]);
 
   return (
